@@ -1,16 +1,13 @@
+import { BrowserRouter } from 'react-router-dom'
+import Router from './Router'
 import './styles/theme.css'
 import './styles/global.css'
-import { Heading } from './components/Heading'
 
 function App() {
   return (
-    <>
-      <Heading>
-        <span>Chronos</span>
-        <span>Pomodoro</span>
-      </Heading>
-      <p>Hello World</p>
-    </>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   )
 }
 
