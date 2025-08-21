@@ -1,10 +1,14 @@
 import { TimerIcon, Clock, Settings, HomeIcon, Sun, Moon } from "lucide-react";
-import { Heading } from "../../components/Heading";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import styles from "./styles.module.css";
 import { useState } from "react";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { Heading } from "../../components/Heading";
+import { Footer } from "../../components/Footer";
+import styles from "./styles.module.css";
+import { Navbar } from "../../components/Navbar";
 
 export function DefaultLayout() {
+  useDocumentTitle()
   const location = useLocation();
   const [currentTheme, setCurrentTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -28,7 +32,7 @@ export function DefaultLayout() {
         <span>Chronos Pomodoro</span>
       </Heading>
 
-      <nav className={styles.navigation}>
+      <Navbar>
         <Link
           to="/"
           className={`${styles.link} ${location.pathname === "/" ? styles.active : ""}`}
@@ -54,24 +58,11 @@ export function DefaultLayout() {
         <button className={styles.themeToggle} title="Toggle theme" onClick={handleThemeToggle}>
           {currentTheme === "light" ? <Sun size={20} /> : <Moon size={20} />}
         </button>
-      </nav>
+      </Navbar>
 
       <Outlet />
 
-      <footer className={styles.footer}>
-        <span>
-          <a
-            href="https://pt.wikipedia.org/wiki/T%C3%A9cnica_pomodoro"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Entenda a técnica Pomodoro 🍅
-          </a>
-        </span>
-        <p>
-          Chronos Pomodoro {new Date().getFullYear()} - 💚
-        </p>
-      </footer>
+      <Footer />
     </div>
   )
 }
