@@ -1,0 +1,13 @@
+.timerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.timerDisplay span {
+  font-size: 10rem;
+  font-weight: 700;
+  color: var(--text-default);
+  line-height: 1;
+}
