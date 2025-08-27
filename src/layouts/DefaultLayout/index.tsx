@@ -6,6 +6,7 @@ import { Heading } from "../../components/Heading";
 import { Footer } from "../../components/Footer";
 import styles from "./styles.module.css";
 import { Navbar } from "../../components/Navbar";
+import { Logo } from "../../components/Logo";
 
 export function DefaultLayout() {
   useDocumentTitle()
@@ -26,10 +27,7 @@ export function DefaultLayout() {
   return (
     <div className={styles.container}>
       <Heading>
-        <button>
-          <TimerIcon size={48} />
-        </button>
-        <span>Chronos Pomodoro</span>
+        <Logo />
       </Heading>
 
       <Navbar>
