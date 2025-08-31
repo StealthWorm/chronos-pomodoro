@@ -1,0 +1,25 @@
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.formGroup label {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.formGroup input {
+  font-size: 1.6rem;
+  padding: 0.8rem;
+  background-color: transparent;
+  border: none;
+  border-radius: 0.4rem;
+  border-bottom: 1px solid var(--primary);
+  color: var(--text-default);
+}
+
+.formGroup input:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--primary);
+}
