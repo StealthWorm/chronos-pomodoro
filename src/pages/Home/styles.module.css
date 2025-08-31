@@ -1,13 +1,38 @@
-.timerContainer {
+.form {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  flex-direction: column;
+  gap: 2.4rem;
+  text-align: center;
 }
 
-.timerDisplay span {
-  font-size: 10rem;
-  font-weight: 700;
-  color: var(--text-default);
-  line-height: 1;
+.cycle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.cycle ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.cycle ul li {
+  list-style: none;
+  background-color: var(--success);
+  padding: 0.4rem;
+  border-radius: 50%;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.cycle ul li:first-child {
+  background-color: var(--error);
+}
+
+.cycle ul li:last-child {
+  background-color: var(--warning);
 }
