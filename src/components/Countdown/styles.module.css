@@ -1,0 +1,10 @@
+.timerContainer {
+  font-size: clamp(8rem, 25vw, 16rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1;
+  height: 100%;
+  font-weight: bold;
+}
