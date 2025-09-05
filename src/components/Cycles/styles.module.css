@@ -1,0 +1,44 @@
+.cycleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.cycleList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.cycleListDot {
+  list-style: none;
+  background-color: var(--success);
+  padding: 0.4rem;
+  border-radius: 50%;
+  width: 1.6rem;
+  height: 1.6rem;
+  transition: scale 0.3s ease-in-out;
+}
+
+.cycleListDot:hover {
+  scale: 1.1;
+}
+
+.workTime {
+  background-color: var(--success);
+}
+
+.stopTime {
+  background-color: var(--error);
+}
+
+.shortBreakTime {
+  background-color: var(--warning);
+}
+
+.longBreakTime {
+  background-color: var(--info);
+}
