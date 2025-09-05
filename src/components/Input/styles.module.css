@@ -13,13 +13,25 @@
   font-size: 1.6rem;
   padding: 0.8rem;
   background-color: transparent;
-  border: none;
-  border-radius: 0.4rem;
-  border-bottom: 1px solid var(--primary);
+  border: 0.2rem solid transparent;
+  border-bottom: 0.2rem solid var(--primary);
   color: var(--text-default);
+  transition: border-radius 0.2s ease-in-out, border-color 0.5s ease-in-out;
+}
+
+.formGroup input::placeholder {
+  color: var(--gray-500);
+  font-style: italic;
 }
 
 .formGroup input:focus {
   outline: none;
-  box-shadow: 0 0 0 1px var(--primary);
+  border-color: var(--primary);
+  border-radius: 0.8rem;
+}
+
+.formGroup input:disabled {
+  border-bottom-color: var(--disabled);
+  color: var(--text-muted);
+  cursor: not-allowed;
 }
