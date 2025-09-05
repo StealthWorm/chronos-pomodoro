@@ -1,5 +1,6 @@
 import { Container } from "../../components/Container";
 import { Countdown } from "../../components/Countdown";
+import { Cycles } from "../../components/Cycles";
 import { Input } from "../../components/Input";
 import styles from "./styles.module.css";
 
@@ -17,14 +18,7 @@ export function Home() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
           </p>
 
-          <div className={styles.cycle}>
-            <p>Ciclos:</p>
-            <ul>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-          </div>
+          <Cycles />
 
           <button type="submit" className={styles.button}>Start</button>
         </form>

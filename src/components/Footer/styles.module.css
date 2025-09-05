@@ -1,5 +1,6 @@
 .footer {
   display: flex;
+  width: 100%;
   position: fixed;
   padding: 1.4rem;
   bottom: 0;
@@ -7,6 +8,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  background: transparent;
+  backdrop-filter: blur(0.5rem);
 }
 
 .footer a,
