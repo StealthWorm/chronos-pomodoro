@@ -7,9 +7,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1.6rem;
   background: transparent;
-  backdrop-filter: blur(0.5rem);
+  backdrop-filter: blur(0.8rem);
 }
 
 .footer a,

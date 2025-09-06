@@ -13,7 +13,7 @@ export function Footer() {
         </a>
       </span>
       <p>
-        Chronos Pomodoro {new Date().getFullYear()} - 💚
+        Chronos Pomodoro &copy; {new Date().getFullYear()} - 💚
       </p>
     </footer>
   )
