@@ -1,0 +1,33 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+  /* max-width: 20rem; */
+  padding: 0.8rem;
+  border: none;
+  border-radius: 0.8em;
+  background-color: var(--primary);
+  color: var(--text-over-primary);
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+  margin: 4.8rem 0;
+}
+
+.button:not(.disabled):hover {
+  filter: brightness(0.8);
+}
+
+.button.warning {
+  background-color: var(--warning);
+}
+
+.button.error {
+  background-color: var(--error);
+}
+
+.button.disabled {
+  background-color: var(--disabled);
+  cursor: not-allowed;
+}
