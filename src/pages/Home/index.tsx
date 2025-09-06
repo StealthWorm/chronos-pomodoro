@@ -1,3 +1,5 @@
+import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
+import { Button } from "../../components/Button";
 import { Container } from "../../components/Container";
 import { Countdown } from "../../components/Countdown";
 import { Cycles } from "../../components/Cycles";
@@ -20,7 +22,7 @@ export function Home() {
 
           <Cycles />
 
-          <button type="submit" className={styles.button}>Start</button>
+          <Button type="submit" icon={<PlayCircleIcon size={32} />} />
         </form>
       </Container>
     </>
