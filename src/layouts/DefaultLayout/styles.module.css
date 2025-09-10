@@ -1,7 +1,7 @@
 .container {
   display: flex;
   width: 100%;
-  overflow: auto;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@
 .link,
 .themeToggle {
   display: flex;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   align-items: center;
   padding: 1.2rem;
   background-color: var(--primary);
@@ -23,6 +23,7 @@
   text-decoration: none;
   color: var(--text-default);
   transition: all 0.4s ease-in-out;
+  backdrop-filter: blur(10px);
 }
 
 .link:hover,
@@ -32,7 +33,7 @@
 
 .link.active,
 .themeToggle.active {
-  background-color: transparent;
+  background-color: #0a0f1aa3;
   color: var(--primary);
   border-color: var(--primary);
 }

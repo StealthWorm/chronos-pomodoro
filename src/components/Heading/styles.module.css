@@ -1,7 +1,37 @@
 .heading {
   display: flex;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 2rem 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
+  gap: 2rem;
+}
+
+.heading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(20px);
+  mask: linear-gradient(
+    180deg,
+    black 30%,
+    rgba(0, 0, 0, 0.8) 50%,
+    rgba(0, 0, 0, 0.4) 70%,
+    transparent 100%
+  );
+
+  -webkit-mask: linear-gradient(
+    180deg,
+    black 30%,
+    rgba(0, 0, 0, 0.8) 50%,
+    rgba(0, 0, 0, 0.4) 70%,
+    transparent 100%
+  );
+  background: rgba(0, 0, 0, 0.507);
+  pointer-events: none;
+  z-index: -1;
 }

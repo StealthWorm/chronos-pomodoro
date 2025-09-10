@@ -7,8 +7,8 @@ interface HeadingProps {
 
 export function Heading({ children }: HeadingProps) {
   return (
-    <h1 className={styles.heading}>
+    <header className={styles.heading}>
       {children}
-    </h1>
+    </header>
   )
 }

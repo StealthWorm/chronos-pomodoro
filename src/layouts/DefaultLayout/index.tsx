@@ -28,35 +28,34 @@ export function DefaultLayout() {
     <div className={styles.container}>
       <Heading>
         <Logo />
+        <Navbar>
+          <Link
+            to="/"
+            className={`${styles.link} ${location.pathname === "/" ? styles.active : ""}`}
+            title="Home"
+          >
+            <HomeIcon size={20} />
+          </Link>
+          <Link
+            to="/history"
+            className={`${styles.link} ${location.pathname === "/history" ? styles.active : ""}`}
+            title="History"
+          >
+            <Clock size={20} />
+          </Link>
+          <Link
+            to="/settings"
+            className={`${styles.link} ${location.pathname === "/settings" ? styles.active : ""}`}
+            title="Settings"
+          >
+            <Settings size={20} />
+          </Link>
+
+          <button className={styles.themeToggle} title="Toggle theme" onClick={handleThemeToggle}>
+            {currentTheme === "light" ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+        </Navbar>
       </Heading>
-
-      <Navbar>
-        <Link
-          to="/"
-          className={`${styles.link} ${location.pathname === "/" ? styles.active : ""}`}
-          title="Home"
-        >
-          <HomeIcon size={20} />
-        </Link>
-        <Link
-          to="/history"
-          className={`${styles.link} ${location.pathname === "/history" ? styles.active : ""}`}
-          title="History"
-        >
-          <Clock size={20} />
-        </Link>
-        <Link
-          to="/settings"
-          className={`${styles.link} ${location.pathname === "/settings" ? styles.active : ""}`}
-          title="Settings"
-        >
-          <Settings size={20} />
-        </Link>
-
-        <button className={styles.themeToggle} title="Toggle theme" onClick={handleThemeToggle}>
-          {currentTheme === "light" ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
-      </Navbar>
 
       <Outlet />
 
