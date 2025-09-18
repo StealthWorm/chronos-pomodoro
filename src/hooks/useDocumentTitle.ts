@@ -14,4 +14,6 @@ export function useDocumentTitle() {
     const title = routeTitles[location.pathname] || 'Chronos Pomodoro'
     document.title = title
   }, [location.pathname])
+
+  return { location }
 }

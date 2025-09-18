@@ -16,7 +16,7 @@
   position: absolute;
   inset: 0;
   backdrop-filter: blur(20px);
-  mask: linear-gradient(
+  /* mask: linear-gradient(
     180deg,
     black 30%,
     rgba(0, 0, 0, 0.8) 50%,
@@ -30,8 +30,8 @@
     rgba(0, 0, 0, 0.8) 50%,
     rgba(0, 0, 0, 0.4) 70%,
     transparent 100%
-  );
-  background: rgba(0, 0, 0, 0.507);
+  ); */
+  /* background: rgba(0, 0, 0, 0.507); */
   pointer-events: none;
   z-index: -1;
 }

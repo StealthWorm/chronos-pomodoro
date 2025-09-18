@@ -1,76 +1,75 @@
-import { TimerIcon, Clock, Settings, HomeIcon, Sun, Moon } from "lucide-react";
-import { Link, Outlet, useLocation } from "react-router-dom";
-import { use, useEffect, useState } from "react";
+import { Clock, Settings, HomeIcon, Sun, Moon } from "lucide-react";
+import { Link, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { Heading } from "../../components/Heading";
 import { Footer } from "../../components/Footer";
-import styles from "./styles.module.css";
 import { Navbar } from "../../components/Navbar";
 import { Logo } from "../../components/Logo";
+import styles from "./styles.module.css";
 
-type AvailableThemes = "dark" | "light";
+type Theme = "dark" | "light";
+
+const NAVIGATION_ITEMS = [
+  {
+    path: "/",
+    icon: HomeIcon,
+    title: "Home",
+    ariaLabel: "Ir para Home"
+  },
+  {
+    path: "/history",
+    icon: Clock,
+    title: "History",
+    ariaLabel: "Ir para Histórico"
+  },
+  {
+    path: "/settings",
+    icon: Settings,
+    title: "Settings",
+    ariaLabel: "Ir para Configurações"
+  }
+] as const;
 
 export function DefaultLayout() {
-  useDocumentTitle()
-  const location = useLocation();
-  const [currentTheme, setCurrentTheme] = useState<AvailableThemes>(localStorage.getItem("theme") as AvailableThemes || "dark");
+  const { location } = useDocumentTitle();
+  const [theme, setTheme] = useState<Theme>(() =>
+    (localStorage.getItem("theme") as Theme) || "dark"
+  );
 
-  function handleThemeToggle(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault();
-
-    setCurrentTheme((prevTheme) => {
-      return prevTheme === "dark" ? "light" : "dark";
-    });
-  }
+  const handleToggleTheme = () => {
+    setTheme(prevTheme => prevTheme === "dark" ? "light" : "dark");
+  };
 
   useEffect(() => {
-    const currentTheme = localStorage.getItem("theme") as AvailableThemes;
-    const nextTheme = currentTheme === "dark" ? "light" : "dark";
-
-    document.documentElement.setAttribute("data-theme", nextTheme);
-    localStorage.setItem("theme", nextTheme);
-  }, [currentTheme]);
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <div className={styles.container}>
       <Heading>
         <Logo />
         <Navbar>
-          <Link
-            to="/"
-            className={`${styles.link} ${location.pathname === "/" ? styles.active : ""}`}
-            title="Home"
-            aria-label="Ir para Home"
-          >
-            <HomeIcon size={20} />
-          </Link>
-          <Link
-            to="/history"
-            className={`${styles.link} ${location.pathname === "/history" ? styles.active : ""}`}
-            title="History"
-            aria-label="Ir para Histórico"
-          >
-            <Clock size={20} />
-          </Link>
-          <Link
-            to="/settings"
-            className={`${styles.link} ${location.pathname === "/settings" ? styles.active : ""}`}
-            title="Settings"
-            aria-label="Ir para Configurações"
-          >
-            <Settings size={20} />
-          </Link>
+          {NAVIGATION_ITEMS.map(({ path, icon: Icon, title, ariaLabel }) => (
+            <Link
+              key={path}
+              to={path}
+              className={`${styles.link} ${location.pathname === path ? styles.active : ""}`}
+              title={title}
+              aria-label={ariaLabel}
+            >
+              <Icon size={20} />
+            </Link>
+          ))}
 
           <button
             className={styles.themeToggle}
             title="Toggle theme"
-            onClick={(e) => handleThemeToggle(e)}
+            onClick={handleToggleTheme}
             aria-label="Mudar tema"
           >
-            {currentTheme === "light"
-              ? <Sun size={20} />
-              : <Moon size={20} />
-            }
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
         </Navbar>
       </Heading>
@@ -79,5 +78,5 @@ export function DefaultLayout() {
 
       <Footer />
     </div>
-  )
+  );
 }
