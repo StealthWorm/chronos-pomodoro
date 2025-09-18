@@ -3,6 +3,8 @@ import { DefaultLayout } from './layouts/DefaultLayout'
 import { Home } from './pages/Home'
 import { History } from './pages/History'
 import { Settings } from './pages/Settings'
+import { About } from './pages/About'
+import { NotFound } from './pages/NotFound'
 
 export default function Router() {
   return (
@@ -11,6 +13,8 @@ export default function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/history" element={<History />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/about" element={<About />} />
+        <Route path="404" element={<NotFound />} />
       </Route>
     </Routes>
   )
