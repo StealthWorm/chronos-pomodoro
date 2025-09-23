@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import { TasksContext } from "../../contexts";
 
 export function Countdown() {
-  const [time, setTime] = useState<number>(10 * 60 * 1000); // 10 minutes
+  const { secondsRemaining } = useContext(TasksContext);
+  const [time, setTime] = useState<number>(secondsRemaining); // 10 minutes
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
   useEffect(() => {

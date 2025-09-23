@@ -34,7 +34,7 @@
 
 .link.active,
 .themeToggle.active {
-  background-color: #0a0f1aa3;
+  background-color: transparent;
   color: var(--primary);
   border-color: var(--primary);
 }
