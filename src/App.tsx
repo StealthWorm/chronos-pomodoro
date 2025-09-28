@@ -2,14 +2,14 @@ import { BrowserRouter } from 'react-router-dom'
 import Router from './Router'
 import './styles/theme.css'
 import './styles/global.css'
-import { TasksContextProvider } from './contexts/TasksContext'
+import { TaskContextProvider } from './contexts/TaskContext/TaskContextProvider'
 
 function App() {
   return (
     <BrowserRouter>
-      <TasksContextProvider>
+      <TaskContextProvider>
         <Router />
-      </TasksContextProvider>
+      </TaskContextProvider>
     </BrowserRouter>
   )
 }
