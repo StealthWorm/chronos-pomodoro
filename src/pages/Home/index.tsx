@@ -6,12 +6,38 @@ import { Cycles } from "../../components/Cycles";
 import { Input } from "../../components/Input";
 import styles from "./styles.module.css";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
+import { useRef } from "react";
+import type { TaskModel } from "../../models/TaskModel";
 
 export function Home() {
-  const { actionTimerStart, state } = useTaskContext();
+  const { actionTimerStart, state, setState } = useTaskContext();
+  const taskInputName = useRef<HTMLInputElement>(null);
 
   const handleStartTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!taskInputName.current || !taskInputName.current.value.trim()) {
+      alert("Task is required");
+      return;
+    }
+
+    const newTask: TaskModel = {
+      id: Date.now().toString(),
+      title: taskInputName.current.value,
+      duration: 25 * 60 * 1000, // 25 minutes
+      startDate: Date.now(),
+      endDate: null,
+      interruptDate: null,
+      type: "focusDuration"
+    }
+
+    setState((prevState) => ({
+      ...prevState,
+      activeTask: newTask,
+      currentCycle: prevState.currentCycle + 1,
+      secondsRemaining: newTask.duration,
+      tasks: [...prevState.tasks, newTask]
+    }));
     actionTimerStart();
   }
 
@@ -22,10 +48,16 @@ export function Home() {
       </Container>
       <Container>
         <form className={styles.form} action="" onSubmit={(e) => handleStartTask(e)}>
-          <Input label="Task" placeholder="Enter your task" id="task" type="text" />
+          <Input
+            label="Task"
+            placeholder="Enter your task"
+            id="task"
+            type="text"
+            ref={taskInputName}
+          />
 
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+            Próximo intervalo é de 25 minutos
           </p>
 
           <Cycles />

@@ -18,15 +18,16 @@ export function TaskContextProvider({ children }: TasksContextProviderProps) {
   }
 
   const actionTimerStart = () => {
+    if (!state.activeTask) return;
+
     setState((prevState) => ({
       ...prevState,
-      currentCycle: prevState.currentCycle === 0 ? prevState.currentCycle + 1 : 0,
-      secondsRemaining: 10 * 60 * 1000, // 10 minutes in milliseconds
+      formattedSecondsRemaining: formatTime(prevState.activeTask!.duration),
     }));
   }
 
   useEffect(() => {
-    if (state.currentCycle > 0) {
+    if (state.activeTask) {
       const interval = setInterval(() => {
         if (state.secondsRemaining <= 0) {
           clearInterval(interval);
@@ -42,7 +43,11 @@ export function TaskContextProvider({ children }: TasksContextProviderProps) {
 
       return () => clearInterval(interval);
     }
-  }, [state.secondsRemaining, state.formattedSecondsRemaining, state.currentCycle]);
+  }, [state.secondsRemaining, state.activeTask]);
+
+  useEffect(() => {
+    console.log(state.activeTask);
+  }, [state.activeTask]);
 
   return (
     <TaskContext.Provider value={{ state, setState, actionTimerStart }}>
