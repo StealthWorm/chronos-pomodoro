@@ -13,7 +13,6 @@ export function Cycles() {
         <li className={`${styles.cycleListDot} ${styles.shortBreakTime}`}></li>
         <li className={`${styles.cycleListDot} ${styles.workTime}`}></li>
         <li className={`${styles.cycleListDot} ${styles.shortBreakTime}`}></li>
-        <li className={`${styles.cycleListDot} ${styles.workTime}`}></li>
         <li className={`${styles.cycleListDot} ${styles.longBreakTime}`}></li>
       </ul>
     </div>
