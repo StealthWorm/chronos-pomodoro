@@ -7,8 +7,8 @@ export const initialState: TaskStateModel = {
   activeTask: null,
   currentCycle: 0,
   config: {
-    focusDuration: 1500, // 25 minutes
-    shortBreakDuration: 300, // 5 minutes
-    longBreakDuration: 900 // 15 minutes
+    focusDuration: 25 * 60 * 1000, // 25 minutes
+    shortBreakDuration: 5 * 60 * 1000, // 5 minutes
+    longBreakDuration: 15 * 60 * 1000 // 15 minutes
   }
 }
