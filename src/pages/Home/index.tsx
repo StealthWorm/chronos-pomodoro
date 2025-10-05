@@ -8,10 +8,15 @@ import styles from "./styles.module.css";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { useRef } from "react";
 import type { TaskModel } from "../../models/TaskModel";
+import { getNextCycle } from "../../utils/getNextCycle";
+import { getNextCycleType } from "../../utils/getNextCycleType";
 
 export function Home() {
   const { actionTimerStart, state, setState } = useTaskContext();
   const taskInputName = useRef<HTMLInputElement>(null);
+
+  const nextCycle = getNextCycle(state.currentCycle);
+  const nextCycleType = getNextCycleType(nextCycle);
 
   const handleStartTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,20 +29,21 @@ export function Home() {
     const newTask: TaskModel = {
       id: Date.now().toString(),
       title: taskInputName.current.value,
-      duration: 25 * 60 * 1000, // 25 minutes
+      duration: state.config[nextCycleType],
       startDate: Date.now(),
       endDate: null,
       interruptDate: null,
-      type: "focusDuration"
+      type: nextCycleType
     }
 
     setState((prevState) => ({
       ...prevState,
       activeTask: newTask,
-      currentCycle: prevState.currentCycle + 1,
+      currentCycle: nextCycle,
       secondsRemaining: newTask.duration,
       tasks: [...prevState.tasks, newTask]
     }));
+
     actionTimerStart();
   }
 
