@@ -10,9 +10,10 @@ import { useRef } from "react";
 import type { TaskModel } from "../../models/TaskModel";
 import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
+import { formatTime } from "../../utils/formatTime";
 
 export function Home() {
-  const { actionTimerStart, state, setState } = useTaskContext();
+  const { state, setState } = useTaskContext();
   const taskInputName = useRef<HTMLInputElement>(null);
 
   const nextCycle = getNextCycle(state.currentCycle);
@@ -41,10 +42,9 @@ export function Home() {
       activeTask: newTask,
       currentCycle: nextCycle,
       secondsRemaining: newTask.duration,
+      formattedSecondsRemaining: formatTime(newTask.duration),
       tasks: [...prevState.tasks, newTask]
     }));
-
-    actionTimerStart();
   }
 
   return (
@@ -70,11 +70,11 @@ export function Home() {
 
           <Button
             type="submit"
-            icon={state.currentCycle > 0
+            icon={state.activeTask
               ? <StopCircleIcon size={32} />
               : <PlayCircleIcon size={32} />
             }
-            color={state.currentCycle > 0 ? "error" : "success"}
+            color={state.activeTask ? "error" : "success"}
           />
         </form>
       </Container>
