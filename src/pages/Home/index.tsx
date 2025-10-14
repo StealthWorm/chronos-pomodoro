@@ -60,21 +60,25 @@ export function Home() {
             id="task"
             type="text"
             ref={taskInputName}
+            disabled={!!state.activeTask}
           />
 
           <p>
             Próximo intervalo é de 25 minutos
           </p>
 
-          <Cycles />
+
+          {state.currentCycle > 0 && <Cycles />}
 
           <Button
-            type="submit"
-            icon={state.activeTask
-              ? <StopCircleIcon size={32} />
-              : <PlayCircleIcon size={32} />
+            type={!state.activeTask ? "submit" : "button"}
+            arria-label={!state.activeTask ? "Iniciar Tarefa" : "Parar Tarefa"}
+            title={!state.activeTask ? "Iniciar Tarefa" : "Parar Tarefa"}
+            icon={!state.activeTask
+              ? <PlayCircleIcon size={32} />
+              : <StopCircleIcon size={32} />
             }
-            color={state.activeTask ? "error" : "success"}
+            color={!state.activeTask ? "success" : "error"}
           />
         </form>
       </Container>

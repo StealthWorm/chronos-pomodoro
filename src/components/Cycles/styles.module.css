@@ -27,7 +27,7 @@
   scale: 1.1;
 }
 
-.workTime {
+.focusDuration {
   background-color: var(--success);
 }
 
@@ -35,10 +35,14 @@
   background-color: var(--error);
 }
 
-.shortBreakTime {
+.shortBreakDuration {
   background-color: var(--warning);
 }
 
-.longBreakTime {
+.longBreakDuration {
   background-color: var(--info);
+}
+
+.active {
+  box-shadow: 0 0 4px var(--gray-200);
 }
