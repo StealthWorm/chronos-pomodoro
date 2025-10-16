@@ -47,6 +47,21 @@ export function Home() {
     }));
   }
 
+  const handleInterruptTask = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (state.activeTask) {
+      e.preventDefault();
+
+      setState((prevState) => ({
+        ...prevState,
+        activeTask: null,
+        secondsRemaining: 0,
+        formattedSecondsRemaining: '00:00',
+        tasks: prevState.tasks.map((task) =>
+          task.id === state.activeTask!.id ? { ...task, interruptDate: Date.now() } : task)
+      }));
+    }
+  }
+
   return (
     <>
       <Container>
@@ -72,13 +87,14 @@ export function Home() {
 
           <Button
             type={!state.activeTask ? "submit" : "button"}
-            arria-label={!state.activeTask ? "Iniciar Tarefa" : "Parar Tarefa"}
+            aria-label={!state.activeTask ? "Iniciar Tarefa" : "Parar Tarefa"}
             title={!state.activeTask ? "Iniciar Tarefa" : "Parar Tarefa"}
             icon={!state.activeTask
               ? <PlayCircleIcon size={32} />
               : <StopCircleIcon size={32} />
             }
             color={!state.activeTask ? "success" : "error"}
+            onClick={(e) => handleInterruptTask(e)}
           />
         </form>
       </Container>

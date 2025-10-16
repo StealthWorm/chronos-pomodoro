@@ -34,6 +34,10 @@ export function TaskContextProvider({ children }: TasksContextProviderProps) {
     }
   }, [state.secondsRemaining, state.activeTask]);
 
+  useEffect(() => {
+    console.log(state.tasks);
+  }, [state.tasks]);
+
   return (
     <TaskContext.Provider value={{ state, setState, actionTimerStart }}>
       {children}

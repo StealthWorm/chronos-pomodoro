@@ -20,7 +20,7 @@ export function Cycles() {
       <ul className={styles.cycleList}>
         {cycleStep.map((task) => (
           <li
-            className={`${styles.cycleListDot} ${styles[task.type]} ${task.id === state.activeTask?.id ? styles.active : ''}`}
+            className={`${styles.cycleListDot} ${styles[task.type]} ${task.id === state.activeTask?.id ? styles.active : ''} ${task.interruptDate ? styles.stopTime : ''}`}
             key={task.id}
             title={cycleDescription[task.type]}
             aria-label={`Indicador de Ciclo - ${cycleDescription[task.type]}`}
