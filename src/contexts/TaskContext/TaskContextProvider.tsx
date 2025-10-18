@@ -1,5 +1,5 @@
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useReducer, useState, type ReactNode } from "react";
 import type { TaskStateModel } from "../../models/TaskStateModel";
 import { initialState } from "./initialState";
 import { TaskContext } from ".";
@@ -11,6 +11,13 @@ interface TasksContextProviderProps {
 
 export function TaskContextProvider({ children }: TasksContextProviderProps) {
   const [state, setState] = useState<TaskStateModel>(initialState);
+  // const [state, dispatch] = useReducer(reducer, initialArg, init?)
+  const [reducerState, dispatch] = useReducer(
+    (state: TaskStateModel, action: any) => { return { ...state, ...action } },
+    initialState,
+    () => initialState
+  );
+
   const actionTimerStart = () => {
     if (!state.activeTask) return;
   }
