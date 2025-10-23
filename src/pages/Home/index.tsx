@@ -1,19 +1,18 @@
 import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
+import { useRef } from "react";
 import { Button } from "../../components/Button";
 import { Container } from "../../components/Container";
 import { Countdown } from "../../components/Countdown";
 import { Cycles } from "../../components/Cycles";
 import { Input } from "../../components/Input";
-import styles from "./styles.module.css";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
-import { useRef } from "react";
-import type { TaskModel } from "../../models/TaskModel";
 import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
-import { formatTime } from "../../utils/formatTime";
+import type { TaskModel } from "../../models/TaskModel";
+import styles from "./styles.module.css";
 
 export function Home() {
-  const { state, setState } = useTaskContext();
+  const { state, createNewTask, interruptTask } = useTaskContext();
   const taskInputName = useRef<HTMLInputElement>(null);
 
   const nextCycle = getNextCycle(state.currentCycle);
@@ -37,28 +36,15 @@ export function Home() {
       type: nextCycleType
     }
 
-    setState((prevState) => ({
-      ...prevState,
-      activeTask: newTask,
-      currentCycle: nextCycle,
-      secondsRemaining: newTask.duration,
-      formattedSecondsRemaining: formatTime(newTask.duration),
-      tasks: [...prevState.tasks, newTask]
-    }));
+    createNewTask(newTask);
   }
+
 
   const handleInterruptTask = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (state.activeTask) {
       e.preventDefault();
 
-      setState((prevState) => ({
-        ...prevState,
-        activeTask: null,
-        secondsRemaining: 0,
-        formattedSecondsRemaining: '00:00',
-        tasks: prevState.tasks.map((task) =>
-          task.id === state.activeTask!.id ? { ...task, interruptDate: Date.now() } : task)
-      }));
+      interruptTask(state.activeTask);
     }
   }
 
@@ -79,7 +65,7 @@ export function Home() {
           />
 
           <p>
-            Próximo intervalo é de 25 minutos
+            {` Próximo intervalo é de ${state.config[nextCycleType] / 1000 / 60} minutos`}
           </p>
 
 
