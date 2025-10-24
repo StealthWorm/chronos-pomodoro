@@ -10,6 +10,7 @@ import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
 import type { TaskModel } from "../../models/TaskModel";
 import styles from "./styles.module.css";
+import { Tips } from "../../components/Tips";
 
 export function Home() {
   const { state, createNewTask, interruptTask } = useTaskContext();
@@ -39,7 +40,6 @@ export function Home() {
     createNewTask(newTask);
   }
 
-
   const handleInterruptTask = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (state.activeTask) {
       e.preventDefault();
@@ -64,10 +64,7 @@ export function Home() {
             disabled={!!state.activeTask}
           />
 
-          <p>
-            {` Próximo intervalo é de ${state.config[nextCycleType] / 1000 / 60} minutos`}
-          </p>
-
+          <Tips />
 
           {state.currentCycle > 0 && <Cycles />}
 
