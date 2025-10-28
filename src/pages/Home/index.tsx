@@ -9,8 +9,9 @@ import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
 import type { TaskModel } from "../../models/TaskModel";
-import styles from "./styles.module.css";
 import { Tips } from "../../components/Tips";
+import { TimerWorkerManager } from "../../workers/timerWorkerManager";
+import styles from "./styles.module.css";
 
 export function Home() {
   const { state, createNewTask, interruptTask } = useTaskContext();
@@ -38,6 +39,14 @@ export function Home() {
     }
 
     createNewTask(newTask);
+
+    const worker = TimerWorkerManager.getInstance();
+
+    worker.onmessage((event) => {
+      console.log('recebeu', event.data);
+    })
+
+    worker.postMessage("lalala")
   }
 
   const handleInterruptTask = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
