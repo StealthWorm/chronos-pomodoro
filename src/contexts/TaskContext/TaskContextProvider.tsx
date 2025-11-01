@@ -1,11 +1,17 @@
-
-import { useEffect, useReducer, type ReactNode } from "react";
+import { useEffect, useReducer, useRef, type ReactNode } from "react";
 import { initialState } from "./initialState";
 import { TaskContext } from ".";
 import { taskReducer } from "../../reducers/tasks/reducer";
-import { createNewTaskAction, endTaskAction, interruptTaskAction, resetAction, updateTimerAction } from "../../reducers/tasks/actions";
+import {
+  createNewTaskAction,
+  endTaskAction,
+  interruptTaskAction,
+  resetAction,
+  updateTimerAction
+} from "../../reducers/tasks/actions";
 import type { TaskModel } from "../../models/TaskModel";
 import { TimerWorkerManager } from "../../workers/timerWorkerManager";
+import { loadBeep } from "../../utils/loadBeep";
 
 interface TasksContextProviderProps {
   children: ReactNode
@@ -13,6 +19,7 @@ interface TasksContextProviderProps {
 
 export function TaskContextProvider({ children }: TasksContextProviderProps) {
   const [state, dispatch] = useReducer(taskReducer, initialState);
+  const playBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null); // hook para carregar o audio e evitar que seja carregado a cada renderização
 
   const worker = TimerWorkerManager.getInstance();
 
@@ -21,7 +28,11 @@ export function TaskContextProvider({ children }: TasksContextProviderProps) {
     const countDownMilliseconds = e.data;
 
     if (countDownMilliseconds <= 0) {
-      console.log('Worker COMPLETED');
+      if (playBeepRef.current) {
+        playBeepRef.current();
+        playBeepRef.current = null;
+      }
+
       dispatch(endTaskAction());
       worker.terminate();
       return;
@@ -45,16 +56,20 @@ export function TaskContextProvider({ children }: TasksContextProviderProps) {
   }, [state.currentCycle, state.activeTask]);
 
   useEffect(() => {
-    console.log('state', state);
-
     if (!state.activeTask) {
-      console.log('Worker terminado por falta de activeTask');
-
       worker.terminate();
     }
 
     worker.postMessage(state);
   }, [worker, state]);
+
+  useEffect(() => {
+    if (state.activeTask && !playBeepRef.current) {
+      playBeepRef.current = loadBeep();
+    } else {
+      playBeepRef.current = null;
+    }
+  }, [state.activeTask]);
 
   return (
     <TaskContext.Provider value={{
