@@ -10,9 +10,19 @@ export function taskReducer(state: TaskStateModel, action: TaskActionModel) {
         ...state,
         activeTask: action.payload.task,
         currentCycle: getNextCycle(state.currentCycle),
-        secondsRemaining: action.payload.task.duration,
-        formattedSecondsRemaining: formatTime(action.payload.task.duration),
+        millisecondsRemaining: action.payload.task.duration,
+        formattedMillisecondsRemaining: formatTime(action.payload.task.duration),
         tasks: [...state.tasks, action.payload.task],
+      }
+    }
+
+    case TaskActionTypes.END_TASK: {
+      return {
+        ...state,
+        activeTask: null,
+        millisecondsRemaining: 0,
+        formattedMillisecondsRemaining: '00:00',
+        tasks: state.tasks.map(task => task.id === state.activeTask?.id ? { ...task, endDate: Date.now() } : task),
       }
     }
 
@@ -20,8 +30,8 @@ export function taskReducer(state: TaskStateModel, action: TaskActionModel) {
       return {
         ...state,
         activeTask: null,
-        secondsRemaining: 0,
-        formattedSecondsRemaining: '00:00',
+        millisecondsRemaining: 0,
+        formattedMillisecondsRemaining: '00:00',
         tasks: state.tasks.map(task => task.id === state.activeTask?.id ? { ...task, interruptDate: Date.now() } : task),
       }
     }
@@ -29,8 +39,8 @@ export function taskReducer(state: TaskStateModel, action: TaskActionModel) {
     case TaskActionTypes.UPDATE_TIME_REMAINING: {
       return {
         ...state,
-        secondsRemaining: state.secondsRemaining - 10,
-        formattedSecondsRemaining: formatTime(state.secondsRemaining),
+        millisecondsRemaining: action.payload.millisecondsRemaining,
+        formattedMillisecondsRemaining: formatTime(action.payload.millisecondsRemaining),
       }
     }
 
@@ -38,8 +48,8 @@ export function taskReducer(state: TaskStateModel, action: TaskActionModel) {
       return {
         ...state,
         activeTask: null,
-        secondsRemaining: 0,
-        formattedSecondsRemaining: '00:00',
+        millisecondsRemaining: 0,
+        formattedMillisecondsRemaining: '00:00',
         tasks: [],
       }
     }

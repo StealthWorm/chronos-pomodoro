@@ -5,7 +5,7 @@ import type { TaskModel } from "../../models/TaskModel";
 export type TaskContextType = {
   state: TaskStateModel;
   createNewTask: (task: TaskModel) => void;
-  interruptTask: (activeTask: TaskModel) => void;
+  interruptTask: () => void;
   endTask: () => void;
   reset: () => void;
 };

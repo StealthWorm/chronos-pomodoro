@@ -10,9 +10,9 @@ export enum TaskActionTypes {
 
 export type TaskActionModel =
   | { type: TaskActionTypes.START_TASK, payload: { task: TaskModel } }
-  | { type: TaskActionTypes.INTERRUPT_TASK, payload: { activeTask: TaskModel } }
-  | { type: TaskActionTypes.UPDATE_TIME_REMAINING }
   | { type: TaskActionTypes.END_TASK }
+  | { type: TaskActionTypes.INTERRUPT_TASK }
+  | { type: TaskActionTypes.UPDATE_TIME_REMAINING, payload: { millisecondsRemaining: number } }
   | { type: TaskActionTypes.RESET }
 
 export function createNewTaskAction(task: TaskModel): TaskActionModel {
@@ -24,18 +24,23 @@ export function createNewTaskAction(task: TaskModel): TaskActionModel {
   }
 }
 
-export function interruptTaskAction(activeTask: TaskModel): TaskActionModel {
+export function endTaskAction(): TaskActionModel {
+  return {
+    type: TaskActionTypes.END_TASK,
+  }
+}
+export function interruptTaskAction(): TaskActionModel {
   return {
     type: TaskActionTypes.INTERRUPT_TASK,
-    payload: {
-      activeTask
-    },
   }
 }
 
-export function updateTimerAction(): TaskActionModel {
+export function updateTimerAction(millisecondsRemaining: number): TaskActionModel {
   return {
     type: TaskActionTypes.UPDATE_TIME_REMAINING,
+    payload: {
+      millisecondsRemaining
+    },
   }
 }
 
