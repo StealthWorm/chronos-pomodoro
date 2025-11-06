@@ -8,6 +8,7 @@ import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
 import type { TaskModel } from "../../models/TaskModel";
 import { Tips } from "../../components/Tips";
+import { toastifyAdapter } from "../../adapters/toastify.adapter";
 import styles from "./styles.module.css";
 
 export function Form() {
@@ -19,9 +20,10 @@ export function Form() {
 
   const handleStartTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    toastifyAdapter.dismiss();
 
     if (!taskInputName.current || !taskInputName.current.value.trim()) {
-      alert("Task is required");
+      toastifyAdapter.warning("A task é obrigatória");
       return;
     }
 
@@ -36,13 +38,17 @@ export function Form() {
     }
 
     createNewTask(newTask);
+
+    toastifyAdapter.success("Tarefa iniciada !!");
   }
 
   const handleInterruptTask = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (state.activeTask) {
       e.preventDefault();
+      toastifyAdapter.dismiss();
 
       interruptTask();
+      toastifyAdapter.error("Tarefa interrompida !!");
     }
   }
 
