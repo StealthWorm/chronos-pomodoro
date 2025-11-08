@@ -60,6 +60,8 @@ export function TaskContextProvider({ children }: TasksContextProviderProps) {
       worker.terminate();
     }
 
+    document.title = `${state.formattedMillisecondsRemaining} - Chronos Pomodoro`;
+
     worker.postMessage(state);
   }, [worker, state]);
 

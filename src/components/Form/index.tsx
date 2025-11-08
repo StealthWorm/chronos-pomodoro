@@ -14,6 +14,7 @@ import styles from "./styles.module.css";
 export function Form() {
   const { state, createNewTask, interruptTask } = useTaskContext();
   const taskInputName = useRef<HTMLInputElement>(null);
+  const lastTaskTitle = state.tasks[state.tasks.length - 1]?.title || '';
 
   const nextCycle = getNextCycle(state.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
@@ -61,6 +62,7 @@ export function Form() {
         type="text"
         ref={taskInputName}
         disabled={!!state.activeTask}
+        defaultValue={lastTaskTitle}
       />
 
       <Tips />
