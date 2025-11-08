@@ -1,8 +1,9 @@
 import { Settings as SettingsIcon, Volume2, Bell, Palette } from 'lucide-react'
+import { Container } from '../../components/Container'
 
 export function Settings() {
   return (
-    <main>
+    <Container>
       <div className="settings-container">
         <h2>Settings</h2>
 
@@ -39,23 +40,8 @@ export function Settings() {
             <input type="checkbox" defaultChecked />
           </div>
         </div>
-
-        <div className="settings-section">
-          <h3>Appearance</h3>
-          <div className="setting-item">
-            <label>
-              <Palette size={16} />
-              Theme
-            </label>
-            <select defaultValue="dark">
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-              <option value="auto">Auto</option>
-            </select>
-          </div>
-        </div>
       </div>
-    </main>
+    </Container>
   )
 }
 

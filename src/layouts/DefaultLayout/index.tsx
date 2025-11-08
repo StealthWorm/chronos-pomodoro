@@ -1,11 +1,11 @@
 import { Clock, Settings, HomeIcon, Sun, Moon } from "lucide-react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import { useEffect, useState } from "react";
-import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { Heading } from "../../components/Heading";
 import { Footer } from "../../components/Footer";
 import { Navbar } from "../../components/Navbar";
 import { Logo } from "../../components/Logo";
+import { RouterLink } from "../../components/RouterLink";
 import styles from "./styles.module.css";
 
 type Theme = "dark" | "light";
@@ -32,7 +32,6 @@ const NAVIGATION_ITEMS = [
 ] as const;
 
 export function DefaultLayout() {
-  const { location } = useDocumentTitle();
   const [theme, setTheme] = useState<Theme>(() =>
     (localStorage.getItem("theme") as Theme) || "dark"
   );
@@ -52,15 +51,15 @@ export function DefaultLayout() {
         <Logo />
         <Navbar>
           {NAVIGATION_ITEMS.map(({ path, icon: Icon, title, ariaLabel }) => (
-            <Link
+            <RouterLink
               key={path}
-              to={path}
+              href={path}
               className={`${styles.link} ${location.pathname === path ? styles.active : ""}`}
               title={title}
               aria-label={ariaLabel}
             >
               <Icon size={20} />
-            </Link>
+            </RouterLink>
           ))}
 
           <button
