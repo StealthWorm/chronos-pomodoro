@@ -1,5 +1,5 @@
-import { BrowserRouter } from 'react-router-dom'
-import Router from './Router'
+import { router } from './routers/MainRouter'
+import { RouterProvider } from 'react-router'
 import { TaskContextProvider } from './contexts/TaskContext/TaskContextProvider'
 import { Message } from './components/Message'
 import './styles/theme.css'
@@ -7,13 +7,11 @@ import './styles/global.css'
 
 function App() {
   return (
-    <BrowserRouter>
-      <TaskContextProvider>
-        <Message>
-          <Router />
-        </Message>
-      </TaskContextProvider>
-    </BrowserRouter>
+    <TaskContextProvider>
+      <Message>
+        <RouterProvider router={router} />
+      </Message>
+    </TaskContextProvider>
   )
 }
 
