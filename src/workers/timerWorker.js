@@ -17,8 +17,8 @@ self.onmessage = function (event) {
     const now = Date.now();
     countDownMilliseconds = Math.ceil(endDate - now);
 
-    setTimeout(tick, 1000);
+    requestAnimationFrame(tick);
   }
 
-  tick();
+  requestAnimationFrame(tick);
 };
