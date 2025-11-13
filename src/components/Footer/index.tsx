@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <span>
-        <RouterLink href="/about">
+        <RouterLink href="/about" className={styles.link}>
           Entenda a técnica Pomodoro 🍅
         </RouterLink>
       </span>

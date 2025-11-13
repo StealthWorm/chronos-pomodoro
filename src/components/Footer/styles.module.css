@@ -11,10 +11,20 @@
   backdrop-filter: blur(0.8rem);
 }
 
-.footer a,
-p {
-  text-decoration: none;
+.footer p {
   color: var(--text-default);
+  font-size: 1.2rem;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--link-color);
   transition: all 0.2s ease-in-out;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.link:hover {
+  color: var(--link-hover);
+  text-shadow: 0 0 0.5rem var(--link-hover);
 }
