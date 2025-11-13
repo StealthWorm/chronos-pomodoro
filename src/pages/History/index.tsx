@@ -1,45 +1,63 @@
-import { Clock, CheckCircle, XCircle, Pause } from 'lucide-react'
+import { TrashIcon } from 'lucide-react'
+import { Container } from '../../components/Container';
+import { Heading } from '../../components/Heading';
+import { Button } from '../../components/Button';
+import styles from './styles.module.css';
 
 export function History() {
+  const taskStatusColor = {
+    completed: 'success',
+    interrupted: 'error',
+    pending: 'warning',
+  }
   return (
-    <main>
-      <div className="history-container">
-        <h2>Session History</h2>
+    <div className={styles.historyContainer}>
+      <Container>
+        <Heading className={styles.heading}>
+          <span>History</span>
+          <span className={styles.buttonContainer}>
+            <Button
+              icon={<TrashIcon />}
+              color='error'
+              aria-label='Apagar todo o histórico'
+              title='Apagar histórico'
+            />
+          </span>
+        </Heading>
+      </Container>
 
-        <div className="history-stats">
-          <div className="stat-card">
-            <CheckCircle size={24} />
-            <span>Completed: 12</span>
-          </div>
-          <div className="stat-card">
-            <Pause size={24} />
-            <span>Paused: 3</span>
-          </div>
-          <div className="stat-card">
-            <XCircle size={24} />
-            <span>Abandoned: 1</span>
-          </div>
-        </div>
+      <Container>
+        <div className={styles.responsiveTable}>
+          <table>
+            <thead>
+              <tr>
+                <th>Tarefa</th>
+                <th>Duração</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Tipo</th>
+              </tr>
+            </thead>
 
-        <div className="history-list">
-          <div className="history-item completed">
-            <Clock size={16} />
-            <span>Focus Session - 25:00</span>
-            <span>Today, 14:30</span>
-          </div>
-          <div className="history-item completed">
-            <Clock size={16} />
-            <span>Break Session - 05:00</span>
-            <span>Today, 14:05</span>
-          </div>
-          <div className="history-item paused">
-            <Clock size={16} />
-            <span>Focus Session - 15:23</span>
-            <span>Today, 13:45</span>
-          </div>
+            <tbody>
+              {Array.from({ length: 20 }).map((_, index) => {
+                return (
+                  <tr key={index}>
+                    <td>Estudar</td>
+                    <td>25min</td>
+                    <td>20/04/2025 08:00</td>
+                    <td>
+                      <span className={styles[taskStatusColor.completed]}>Completa</span>
+                    </td>
+                    <td>Foco</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
-      </div>
-    </main>
+      </Container>
+    </div>
   )
 }
 

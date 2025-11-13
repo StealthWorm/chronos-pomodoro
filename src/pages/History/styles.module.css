@@ -1,0 +1,87 @@
+.historyContainer {
+  padding: 0 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.heading {
+  z-index: 0;
+}
+
+.buttonContainer button {
+  min-width: auto;
+  margin: 0;
+  padding: 1rem;
+}
+
+.buttonContainer button svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.responsiveTable {
+  width: 100%;
+  max-width: 64rem;
+  box-sizing: border-box;
+  overflow-x: auto;
+  border-radius: 0.8rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.responsiveTable::-webkit-scrollbar-thumb {
+  width: 0.2rem;
+  height: 0.2rem;
+  background-color: var(--primary);
+  opacity: 0.1;
+  border-radius: 0.48em;
+}
+
+.responsiveTable table {
+  width: 100%;
+  min-width: 64rem;
+  font-size: 1.6rem;
+  border-collapse: collapse;
+}
+
+.responsiveTable th {
+  background-color: var(--gray-600);
+  color: var(--text-default);
+  border-bottom: 0.1rem solid var(--gray-600);
+}
+
+.responsiveTable td {
+  background-color: var(--gray-800);
+}
+
+.responsiveTable th,
+.responsiveTable td {
+  border-bottom: 0.2rem solid var(--gray-700);
+  padding: 1.6rem;
+  text-align: left;
+}
+
+.responsiveTable td span {
+  border-radius: 9999px;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-default);
+}
+
+.responsiveTable td span.success {
+  background-color: var(--success);
+  color: var(--text-over-success);
+}
+
+.responsiveTable td span.warning {
+  background-color: var(--warning);
+}
+
+.responsiveTable td span.error {
+  background-color: var(--error);
+}
