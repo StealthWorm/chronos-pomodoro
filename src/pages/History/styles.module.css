@@ -33,14 +33,6 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.responsiveTable::-webkit-scrollbar-thumb {
-  width: 0.2rem;
-  height: 0.2rem;
-  background-color: var(--primary);
-  opacity: 0.1;
-  border-radius: 0.48em;
-}
-
 .responsiveTable table {
   width: 100%;
   min-width: 64rem;
