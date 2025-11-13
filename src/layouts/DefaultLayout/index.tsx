@@ -7,6 +7,7 @@ import { Navbar } from "../../components/Navbar";
 import { Logo } from "../../components/Logo";
 import { RouterLink } from "../../components/RouterLink";
 import styles from "./styles.module.css";
+import { useLocation } from "react-router";
 
 type Theme = "dark" | "light";
 
@@ -32,6 +33,8 @@ const NAVIGATION_ITEMS = [
 ] as const;
 
 export function DefaultLayout() {
+  const location = useLocation();
+
   const [theme, setTheme] = useState<Theme>(() =>
     (localStorage.getItem("theme") as Theme) || "dark"
   );
@@ -54,9 +57,9 @@ export function DefaultLayout() {
             <RouterLink
               key={path}
               href={path}
-              className={`${styles.link} ${location.pathname === path ? styles.active : ""}`}
               title={title}
               aria-label={ariaLabel}
+              className={`${styles.link} ${location.pathname === path ? styles.active : ""}`}
             >
               <Icon size={20} />
             </RouterLink>
