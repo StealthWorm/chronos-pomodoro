@@ -9,6 +9,10 @@
   overflow-x: hidden;
 }
 
+.heading::before {
+  content: none;
+}
+
 .heading {
   z-index: 0;
 }
@@ -43,7 +47,11 @@
 .responsiveTable th {
   background-color: var(--gray-600);
   color: var(--text-default);
-  border-bottom: 0.1rem solid var(--gray-600);
+  border-bottom: 0.1rem solid var(--primary);
+}
+
+.responsiveTable tr:not(:last-child) {
+  border-bottom: 0.2rem solid var(--gray-700);
 }
 
 .responsiveTable td {
@@ -52,7 +60,6 @@
 
 .responsiveTable th,
 .responsiveTable td {
-  border-bottom: 0.2rem solid var(--gray-700);
   padding: 1.6rem;
   text-align: left;
 }
@@ -67,7 +74,6 @@
 
 .responsiveTable td span.success {
   background-color: var(--success);
-  color: var(--text-over-success);
 }
 
 .responsiveTable td span.warning {
