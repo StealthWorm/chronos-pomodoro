@@ -6,15 +6,10 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { formatDate } from '../../utils/formatDate';
 import styles from './styles.module.css';
 import { formatTime } from '../../utils/formatTime';
+import { getTaskStatus } from '../../utils/getTaskStatus';
 
 export function History() {
   const { state } = useTaskContext();
-
-  const taskStatusColor = {
-    completed: 'success',
-    interrupted: 'error',
-    pending: 'warning',
-  }
 
   const taskTypeTranslation = {
     focusDuration: 'Foco',
@@ -55,21 +50,17 @@ export function History() {
 
             <tbody>
               {orderedTasks.map((task) => {
+                const taskStatus = getTaskStatus(task, state.activeTask);
                 return (
                   <tr key={task.id}>
                     <td>{task.title}</td>
                     <td>{formatTime(task.duration)}</td>
                     <td>{formatDate(task.startDate)}</td>
-                    {task.interruptDate &&
-                      <td >
-                        <span className={styles[taskStatusColor.interrupted]}>Interrompido</span>
-                      </td>}
-                    {task.endDate && <td>
-                      <span className={styles[taskStatusColor.completed]}>Completado</span>
-                    </td>}
-                    {!task.interruptDate && !task.endDate && <td>
-                      <span className={styles[taskStatusColor.pending]}>Pendente</span>
-                    </td>}
+                    <td>
+                      <span className={styles[taskStatus.status]}>
+                        {taskStatus.label}
+                      </span>
+                    </td>
                     <td>
                       <span>{taskTypeTranslation[task.type]}</span>
                     </td>

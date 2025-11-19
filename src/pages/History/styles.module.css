@@ -83,3 +83,7 @@
 .responsiveTable td span.error {
   background-color: var(--error);
 }
+
+.responsiveTable td span.abandoned {
+  background-color: var(--gray-500);
+}
