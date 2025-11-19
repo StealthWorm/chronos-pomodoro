@@ -28,15 +28,15 @@
 }
 
 .focusDuration {
-  background-color: var(--success);
+  background-color: var(--warning);
 }
 
-.stopTime {
-  background-color: var(--error);
+.interrupted {
+  opacity: 0.3;
 }
 
 .shortBreakDuration {
-  background-color: var(--warning);
+  background-color: var(--success);
 }
 
 .longBreakDuration {

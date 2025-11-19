@@ -17,7 +17,8 @@ export function History() {
     longBreakDuration: 'Intervalo Longo',
   }
 
-  const orderedTasks = state.tasks.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+  const orderedTasks = [...state.tasks];
+  orderedTasks.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
 
   return (
     <div className={styles.historyContainer}>
