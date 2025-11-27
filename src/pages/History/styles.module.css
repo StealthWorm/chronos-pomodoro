@@ -50,6 +50,11 @@
   border-bottom: 0.1rem solid var(--primary);
 }
 
+.sortableHeader {
+  cursor: pointer;
+  gap: 0.4rem;
+}
+
 .responsiveTable tr:not(:last-child) {
   border-bottom: 0.2rem solid var(--gray-700);
 }
