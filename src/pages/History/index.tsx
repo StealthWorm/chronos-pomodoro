@@ -9,9 +9,11 @@ import { formatTime } from '../../utils/formatTime';
 import { getTaskStatus } from '../../utils/getTaskStatus';
 import { sortTasks, type SortTasksOptions } from '../../utils/sortTasks';
 import styles from './styles.module.css';
+import { toastifyAdapter } from '../../adapters/toastify.adapter';
 
 export function History() {
   const { state, reset } = useTaskContext();
+  const [confirmClearHistory, setConfirmClearHistory] = useState(false);
   const [sortTasksOptions, setSortTasksOptions] = useState<SortTasksOptions>(() => {
     return {
       tasks: sortTasks({ tasks: state.tasks }),
@@ -41,11 +43,17 @@ export function History() {
   }
 
   const handleDeleteAllTasks = () => {
-    if (!confirm('Tem certeza que deseja apagar todo o histórico?')) {
+    toastifyAdapter.dismiss();
+
+    if (state.activeTask) {
+      toastifyAdapter.error("Não é possível apagar o histórico com uma tarefa em andamento");
       return;
     }
 
-    reset();
+    toastifyAdapter.confirm(
+      'Tem certeza que deseja apagar todo o histórico?',
+      (confirmed) => setConfirmClearHistory(confirmed)
+    );
   }
 
   useEffect(() => {
@@ -58,6 +66,13 @@ export function History() {
       }),
     }));
   }, [state.tasks]);
+
+  useEffect(() => {
+    if (!confirmClearHistory) return;
+
+    reset();
+    setConfirmClearHistory(false);
+  }, [confirmClearHistory, reset]);
 
   const hasTasks = sortTasksOptions.tasks.length > 0;
 
