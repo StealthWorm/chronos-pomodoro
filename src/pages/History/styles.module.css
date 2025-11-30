@@ -52,7 +52,18 @@
 
 .sortableHeader {
   cursor: pointer;
+}
+
+.sortableHeader span {
+  display: flex;
+  align-items: center;
+  text-align: center;
   gap: 0.4rem;
+}
+
+.sortableIcon {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .responsiveTable tr:not(:last-child) {
