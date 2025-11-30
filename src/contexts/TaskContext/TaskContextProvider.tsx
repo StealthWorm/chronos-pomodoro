@@ -58,6 +58,11 @@ export function TaskContextProvider({ children }: TasksContextProviderProps) {
     dispatch(interruptTaskAction());
   }
 
+  const resetState = () => {
+    dispatch(resetAction());
+    localStorage.removeItem('state');
+  }
+
   useEffect(() => {
     if (state.currentCycle >= 8 && !state.activeTask) {
       dispatch(resetAction());
@@ -89,8 +94,7 @@ export function TaskContextProvider({ children }: TasksContextProviderProps) {
       state,
       createNewTask,
       interruptTask,
-      endTask: () => { },
-      reset: () => { }
+      reset: resetState,
     }}
     >
       {children}

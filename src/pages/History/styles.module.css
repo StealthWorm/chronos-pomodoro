@@ -103,3 +103,11 @@
 .responsiveTable td span.abandoned {
   background-color: var(--gray-500);
 }
+
+.noTasks {
+  font-size: 3.2rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  text-align: center;
+  margin: 3.2rem 0;
+}
