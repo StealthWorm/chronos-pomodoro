@@ -63,6 +63,10 @@ export function TaskContextProvider({ children }: TasksContextProviderProps) {
     localStorage.removeItem('state');
   }
 
+  // const saveSettings = (settings: TaskStateModel['config']) => {
+  //   dispatch(saveSettingsAction(settings));
+  // }
+
   useEffect(() => {
     if (state.currentCycle >= 8 && !state.activeTask) {
       dispatch(resetAction());
