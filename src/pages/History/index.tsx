@@ -52,7 +52,12 @@ export function History() {
 
     toastifyAdapter.confirm(
       'Tem certeza que deseja apagar todo o histórico?',
-      (confirmed) => setConfirmClearHistory(confirmed)
+      (confirmed) => {
+        setConfirmClearHistory(confirmed);
+        // if (confirmed) {
+        //   reset();
+        // }
+      }
     );
   }
 
@@ -70,9 +75,15 @@ export function History() {
   useEffect(() => {
     if (!confirmClearHistory) return;
 
-    reset();
     setConfirmClearHistory(false);
+    reset();
   }, [confirmClearHistory, reset]);
+
+  useEffect(() => {
+    return () => {
+      toastifyAdapter.dismiss();
+    }
+  }, []);
 
   const hasTasks = sortTasksOptions.tasks.length > 0;
 
